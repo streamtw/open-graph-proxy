@@ -3,6 +3,7 @@ var https = require('https')
 const { parse } = require('parse-open-graph')
 const cheerio = require('cheerio')
 const axios = require('axios')
+const moment = require('moment')
 
 const axiosClient = axios.create({
     timeout: 10000,
@@ -21,6 +22,10 @@ function parseMeta(html) {
     })).get()
 
     return parse(meta)
+}
+
+function currentDateTime() {
+    return moment().format('YYYY-MM-DD HH:mm:ss')
 }
 
 http.createServer(async function (req, res) {
@@ -54,8 +59,8 @@ http.createServer(async function (req, res) {
         res.end(JSON.stringify(parseMeta(response.data)))
         return
     } catch (e) {
+        console.log(`[${currentDateTime()}] Proxy failed for url: ${urlToFetch}`)
         console.log(e.message)
-        console.log("Proxy failed for url: " + urlToFetch)
 
         res.statusCode = 500
         res.end()
