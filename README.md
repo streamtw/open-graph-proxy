@@ -5,8 +5,8 @@
 docker build -t open-graph-proxy .
 ```
 
-## Run
+## Run container in background
 ```
-docker run -it -p 7000:7000 open-graph-proxy
+docker run -d --name open-graph-proxy -p 7000:7000 -it open-graph-proxy
 ```
 The port number after `:` can be modified to any port you prefer.
