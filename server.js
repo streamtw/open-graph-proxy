@@ -38,6 +38,12 @@ http.createServer(async function (req, res) {
         return
     }
 
+    if (req.url == '/') {
+        res.statusCode = 200
+        res.end('ok')
+        return
+    }
+
     if (false == req.url.startsWith('/fetch/')) {
         res.statusCode = 400
         res.end("Invalid request.")
