@@ -38,7 +38,7 @@ http.createServer(async function (req, res) {
         return
     }
 
-    if (req.url == '/') {
+    if (['', '/'].includes(req.url)) {
         res.statusCode = 200
         res.end('ok')
         return
